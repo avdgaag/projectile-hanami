@@ -184,6 +184,13 @@ values being relative paths to the files."
      ("config/" "/\\(.+\\)\\.rb$")
      ("lib/" "/lib/\\([^/]+\\)\\.rb$"))))
 
+(defun projectile-hanami-find-routes ()
+  "Find the routes file for one of the project's apps."
+  (interactive)
+  (projectile-hanami-find-resource
+   "app: "
+   '(("apps/" "/\\(.+\\)/config/routes.rb$"))))
+
 (defun projectile-hanami-find-entity ()
   "Find an entity in the project."
   (interactive)
@@ -314,6 +321,7 @@ values being relative paths to the files."
     (define-key map (kbd "s") 'projectile-hanami-find-stylesheet)
     (define-key map (kbd "j") 'projectile-hanami-find-javascript)
     (define-key map (kbd "g") 'projectile-hanami-find-config)
+    (define-key map (kbd "u") 'projectile-hanami-find-routes)
     (define-key map (kbd "e") 'projectile-hanami-find-entity)
     (define-key map (kbd "r") 'projectile-hanami-find-repository)
     (define-key map (kbd "m") 'projectile-hanami-find-mailer)

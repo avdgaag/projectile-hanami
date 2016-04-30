@@ -73,6 +73,7 @@ projectile-hanami-find-presenter          | <kbd>C-c e p</kbd>   | Use `projecti
 projectile-hanami-find-stylesheet         | <kbd>C-c e s</kbd>   | Use `projectile-completion-system` to find stylesheets across apps.
 projectile-hanami-find-javascript         | <kbd>C-c e j</kbd>   | Use `projectile-completion-system` to find javascripts across apps.
 projectile-hanami-find-config             | <kbd>C-c e g</kbd>   | Use `projectile-completion-system` to find config files across apps.
+projectile-hanami-find-routes             | <kbd>C-c e u</kbd>   | Use `projectile-completion-system` to find routes files across apps.
 projectile-hanami-find-entity             | <kbd>C-c e e</kbd>   | Use `projectile-completion-system` to find entities.
 projectile-hanami-find-repository         | <kbd>C-c e r</kbd>   | Use `projectile-completion-system` to find repositories.
 projectile-hanami-find-mailer             | <kbd>C-c e m</kbd>   | Use `projectile-completion-system` to find mailers.
