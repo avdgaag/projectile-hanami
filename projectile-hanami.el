@@ -209,8 +209,7 @@ values being relative paths to the files."
    "config: "
    '(("apps/" "/\\(.+\\)/config/\\(.+\\)\\.rb$")
      ("lib/config/" "/\\(.+\\)\\.rb$")
-     ("config/" "/\\(.+\\)\\.rb$")
-     ("lib/" "/lib/\\([^/]+\\)\\.rb$"))))
+     ("config/" "/\\(.+\\)\\.rb$"))))
 
 (defun projectile-hanami-find-routes ()
   "Find the routes file for one of the project's apps."
