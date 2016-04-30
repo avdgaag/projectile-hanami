@@ -165,14 +165,14 @@ values being relative paths to the files."
   (interactive)
   (projectile-hanami-find-resource
    "javascript: "
-   '(("apps/" "/\\(.+\\)/assets/javascripts/\\(.+\\)$"))))
+   '(("apps/" "/\\(.+\\)/assets/javascripts/\\(.+\\.js.*\\)$"))))
 
 (defun projectile-hanami-find-stylesheet ()
   "Find a stylesheet file in one of the project's apps."
   (interactive)
   (projectile-hanami-find-resource
    "stylesheet: "
-   '(("apps/" "/\\(.+\\)/assets/stylesheets/\\(.+\\)$"))))
+   '(("apps/" "/\\(.+\\)/assets/stylesheets/\\(.+\\.css.*\\)$"))))
 
 (defun projectile-hanami-find-config ()
   "Find a config file in one of the project's apps."
