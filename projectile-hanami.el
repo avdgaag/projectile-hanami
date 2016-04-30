@@ -151,7 +151,7 @@ values being relative paths to the files."
   (interactive)
   (projectile-hanami-find-resource
    "template: "
-   '(("apps/" "/\\(.+\\)/templates/\\(.+\\)\\.rb$"))))
+   '(("apps/" "/\\(.+\\)/templates/\\(.+\\..+\\..+\\)$"))))
 
 (defun projectile-hanami-find-presenter ()
   "Find a presenter file in one of the project's apps."
