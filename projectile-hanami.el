@@ -331,6 +331,7 @@ values being relative paths to the files."
     (define-key map (kbd "s") 'projectile-hanami-server)
     map)
   "Keymap for run-commands in `projectile-hanami-mode`.")
+(fset 'projectile-hanami-mode-run-map projectile-hanami-mode-run-map)
 
 (defvar projectile-hanami-mode-goto-map
   (let ((map (make-sparse-keymap)))
