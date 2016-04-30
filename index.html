@@ -19,193 +19,221 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="projectile-hanami" class="anchor" href="#projectile-hanami" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Projectile Hanami</h1>
 
-<h2>
-<a id="summary" class="anchor" href="#summary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Summary</h2>
+      <h1 id="projectile-hanami">Projectile Hanami</h1>
 
-<p>Projectile Hanami is an <a href="http://www.gnu.org/software/emacs/emacs.html">Emacs</a> minor mode, based on <a href="https://github.com/bbatsov/projectile">Projectile</a>, for navigating <a href="https://hanamirb.org">Hanami</a> projects. With Projectile Hanami, you can:</p>
+      <h2 id="summary">Summary</h2>
 
-<ul>
-<li>navigate through entities, repositories, actions, views and templates are different apps in your project;</li>
-<li>run <code>hanami server</code>
-</li>
-<li>run <code>hanami console</code>
-</li>
-<li>run Rake tasks</li>
-</ul>
+      <p>Projectile Hanami is an <a href="http://www.gnu.org/software/emacs/emacs.html">Emacs</a> minor mode, based on <a href="https://github.com/bbatsov/projectile">Projectile</a>, for navigating <a href="https://hanamirb.org">Hanami</a> projects. With Projectile Hanami, you can:</p>
 
-<p>Projectile Hanami is based on <a href="https://github.com/asok/projectile-rails">Projectile Rails</a>, but is not a complete port of all its functionality.</p>
+      <ul>
+        <li>navigate through entities, repositories, actions, views and templates are different apps in your project;</li>
+        <li>quickly jump to some important standard files;</li>
+        <li>run <code>hanami server</code></li>
+        <li>run <code>hanami console</code></li>
+        <li>run <code>hanami generate</code></li>
+        <li>run Rake tasks</li>
+      </ul>
 
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+      <p>Projectile Hanami is based on <a href="https://github.com/asok/projectile-rails">Projectile Rails</a>, but is not a complete port of all its functionality.</p>
 
-<p>This guide assumes you have <a href="https://github.com/bbatsov/projectile">Projectile</a> already set up.</p>
+      <h2 id="installation">Installation</h2>
 
-<p>Since this package is still under heavy development and testing, it is not yet available through one of the popular package managers. You can try it out by cloning the repository and adding it to your <code>load-path</code>:</p>
+      <p>This guide assumes you have <a href="https://github.com/bbatsov/projectile">Projectile</a> already set up.</p>
 
-<div class="highlight highlight-source-lisp"><pre>(add-to-list 'load-path <span class="pl-s"><span class="pl-pds">"</span>/path/to/repo<span class="pl-pds">"</span></span>)
-(require 'projectile-hanami)</pre></div>
+      <p>Since this package is still under heavy development and testing, it is not yet available through one of the popular package managers. You can try it out by cloning the repository and adding it to your <code>load-path</code>:</p>
 
-<p>To have Projectile Hanami loaded whenever Projectile is loaded, you can add it as a hook:</p>
+      <p><code>elisp
+(add-to-list 'load-path "/path/to/repo")
+(require 'projectile-hanami)
+      </code></p>
 
-<div class="highlight highlight-source-lisp"><pre>(add-hook 'projectile-mode-hook 'projectile-hanami-on)</pre></div>
+      <p>To have Projectile Hanami loaded whenever Projectile is loaded, you can add it as a hook:</p>
 
-<p>...but, this will most likely conflict with Projectile Rails. If you use both [Ruby on Rails][] <em>and</em> Hanami, you will probably want something <em>slightly</em> more sophisticated. I use the following snippet:</p>
+      <p><code>elisp
+(add-hook 'projectile-mode-hook 'projectile-hanami-on)
+      </code></p>
 
-<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">projectile-rails-or-hanami-on</span> ()
-  <span class="pl-s"><span class="pl-pds">"</span>Activate either `projectile-rails-mode` or `projectile-hanami-mode`.<span class="pl-pds">"</span></span>
-  (<span class="pl-k">if</span> (projectile-hanami-applicable-p)
-    (projectile-hanami-mode +<span class="pl-c1">1</span>)
-    (projectile-rails-on)))
+      <p>…but, this will most likely conflict with Projectile Rails. If you use both <a href="http://rubyonrails.org">Ruby on Rails</a> <em>and</em> Hanami, you will probably want something <em>slightly</em> more sophisticated. I use the following snippet:</p>
 
-(add-hook 'projectile-mode-hook 'projectile-rails-<span class="pl-k">or</span>-hanami-on)</pre></div>
+      <p>```elisp
+        (defun projectile-rails-or-hanami-on ()
+        “Activate either <code>projectile-rails-mode</code> or <code>projectile-hanami-mode</code>.”
+        (if (projectile-hanami-applicable-p)
+        (projectile-hanami-mode +1)
+        (projectile-rails-on)))</p>
 
-<p>Since Projectile Rails cannot distinguish between Rails and Hanami projects, and Hanami <em>can</em>, we use Projectile Hanami's detection mechanism and fall back to Projectile Rails in case of no match.</p>
+      <p>(add-hook ‘projectile-mode-hook ‘projectile-rails-or-hanami-on)
+        ```</p>
 
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+      <p>Since Projectile Rails cannot distinguish between Rails and Hanami projects, and Hanami <em>can</em>, we use Projectile Hanami’s detection mechanism and fall back to Projectile Rails in case of no match.</p>
 
-<h3>
-<a id="customization" class="anchor" href="#customization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Customization</h3>
+      <h2 id="usage">Usage</h2>
 
-<p>You can define the Projectile Hanami keybinding prefix:</p>
+      <h3 id="customization">Customization</h3>
 
-<div class="highlight highlight-source-lisp"><pre><span class="pl-c">;; Defaults to C-c e</span>
-(<span class="pl-c1">setq</span> projectile-hanami-keymap-prefix (kbd <span class="pl-s"><span class="pl-pds">"</span>C-c p C-q<span class="pl-pds">"</span></span>))</pre></div>
+      <p>You can define the Projectile Hanami keybinding prefix:</p>
 
-<p>To override how Hanami commands are invoked:</p>
+      <p><code>elisp
+;; Defaults to C-c e
+(setq projectile-hanami-keymap-prefix (kbd "C-c p C-q"))
+      </code></p>
 
-<div class="highlight highlight-source-lisp"><pre><span class="pl-c">;; Defaults to `bundle exec hanami`</span>
-(<span class="pl-c1">setq</span> projectile-hanami-cmd <span class="pl-s"><span class="pl-pds">"</span>/path/to/hanami<span class="pl-pds">"</span></span>)</pre></div>
+      <p>To override how Hanami commands are invoked:</p>
 
-<h3>
-<a id="commands" class="anchor" href="#commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands</h3>
+      <p><code>elisp
+;; Defaults to `bundle exec hanami`
+(setq projectile-hanami-cmd "/path/to/hanami")
+      </code></p>
 
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Keybinding</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>projectile-hanami-find-initializer</td>
-<td><kbd>C-c e i</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find initializers across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-lib</td>
-<td><kbd>C-c e l</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find project lib files.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-controller</td>
-<td><kbd>C-c e c</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find controller actions across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-view</td>
-<td><kbd>C-c e v</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find views across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-template</td>
-<td><kbd>C-c e t</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find templates across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-presenter</td>
-<td><kbd>C-c e p</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find presenters across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-stylesheet</td>
-<td><kbd>C-c e s</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find stylesheets across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-javascript</td>
-<td><kbd>C-c e j</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find javascripts across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-config</td>
-<td><kbd>C-c e g</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find config files across apps.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-entity</td>
-<td><kbd>C-c e e</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find entities.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-repository</td>
-<td><kbd>C-c e r</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find repositories.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-mailer</td>
-<td><kbd>C-c e m</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find mailers.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-mailer-template</td>
-<td><kbd>C-c e T</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find mailer templates.</td>
-</tr>
-<tr>
-<td>projectile-hanami-find-application</td>
-<td><kbd>C-c e a</kbd></td>
-<td>Use <code>projectile-completion-system</code> to find main application files.</td>
-</tr>
-<tr>
-<td>projectile-hanami-goto-related-controller</td>
-<td><kbd>C-c e C</kbd></td>
-<td>Find the controller action related to the current view or template.</td>
-</tr>
-<tr>
-<td>projectile-hanami-goto-related-template</td>
-<td><kbd>C-c e T</kbd></td>
-<td>Find the template related to the current view or controller action.</td>
-</tr>
-<tr>
-<td>projectile-hanami-goto-related-view</td>
-<td><kbd>C-c e V</kbd></td>
-<td>Find the view related to the current template or controller action.</td>
-</tr>
-<tr>
-<td>projectile-hanami-goto-entity</td>
-<td><kbd>C-c e E</kbd></td>
-<td>Find the entity for the current repository.</td>
-</tr>
-<tr>
-<td>projectile-hanami-goto-repository</td>
-<td><kbd>C-c e R</kbd></td>
-<td>Find the repository for the current entity.</td>
-</tr>
-<tr>
-<td>projectile-hanami-rake</td>
-<td><kbd>C-c e ! r</kbd></td>
-<td>Run a project Rake task.</td>
-</tr>
-<tr>
-<td>projectile-hanami-console</td>
-<td><kbd>C-c e ! c</kbd></td>
-<td>Run <code>hanami console</code>
-</td>
-</tr>
-<tr>
-<td>projectile-hanami-server</td>
-<td><kbd>C-c e ! s</kbd></td>
-<td>Run <code>hanami server</code>
-</td>
-</tr>
-</tbody>
-</table>
+      <h3 id="commands">Commands</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Command</th>
+            <th>Keybinding</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>projectile-hanami-find-initializer</td>
+            <td><kbd>C-c e i</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find initializers across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-lib</td>
+            <td><kbd>C-c e l</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find project lib files.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-controller</td>
+            <td><kbd>C-c e c</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find controller actions across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-view</td>
+            <td><kbd>C-c e v</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find views across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-template</td>
+            <td><kbd>C-c e t</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find templates across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-presenter</td>
+            <td><kbd>C-c e p</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find presenters across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-stylesheet</td>
+            <td><kbd>C-c e s</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find stylesheets across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-javascript</td>
+            <td><kbd>C-c e j</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find javascripts across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-config</td>
+            <td><kbd>C-c e g</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find config files across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-routes</td>
+            <td><kbd>C-c e u</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find routes files across apps.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-entity</td>
+            <td><kbd>C-c e e</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find entities.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-repository</td>
+            <td><kbd>C-c e r</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find repositories.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-mailer</td>
+            <td><kbd>C-c e m</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find mailers.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-mailer-template</td>
+            <td><kbd>C-c e T</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find mailer templates.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-find-application</td>
+            <td><kbd>C-c e a</kbd></td>
+            <td>Use <code>projectile-completion-system</code> to find main application files.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-related-controller</td>
+            <td><kbd>C-c e C</kbd></td>
+            <td>Find the controller action related to the current view or template.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-related-template</td>
+            <td><kbd>C-c e T</kbd></td>
+            <td>Find the template related to the current view or controller action.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-related-view</td>
+            <td><kbd>C-c e V</kbd></td>
+            <td>Find the view related to the current template or controller action.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-entity</td>
+            <td><kbd>C-c e E</kbd></td>
+            <td>Find the entity for the current repository.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-repository</td>
+            <td><kbd>C-c e R</kbd></td>
+            <td>Find the repository for the current entity.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-mapping</td>
+            <td><kbd>C-c e g m</kbd></td>
+            <td>Find the project’s <code>lib/config/mapping.rb</code> file</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-rakefile</td>
+            <td><kbd>C-c e g r</kbd></td>
+            <td>Find the project’s Rakefile.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-goto-gemfile</td>
+            <td><kbd>C-c e g g</kbd></td>
+            <td>Find the project’s Gemfile.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-rake</td>
+            <td><kbd>C-c e ! r</kbd></td>
+            <td>Run a project Rake task.</td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-console</td>
+            <td><kbd>C-c e ! c</kbd></td>
+            <td>Run <code>hanami console</code></td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-server</td>
+            <td><kbd>C-c e ! s</kbd></td>
+            <td>Run <code>hanami server</code></td>
+          </tr>
+          <tr>
+            <td>projectile-hanami-generate</td>
+            <td><kbd>C-c e ! g</kbd></td>
+            <td>Run <code>hanami generate</code></td>
+          </tr>
+        </tbody>
+      </table>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/avdgaag/projectile-hanami">Projectile Hanami</a> is maintained by <a href="https://github.com/avdgaag">avdgaag</a>.</span>
@@ -215,6 +243,5 @@
 
     </section>
 
-  
   </body>
 </html>
