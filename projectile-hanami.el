@@ -226,6 +226,13 @@ values being relative paths to the files."
    "application: "
    '(("apps/" "/\\(.+\\)/application.rb$"))))
 
+(defun projectile-hanami-find-env ()
+  "Find a .env file in the project root."
+  (interactive)
+  (projectile-hanami-find-resource
+   ".env:"
+   '(("./" "\\(\\.env.*\\)$"))))
+
 (defun projectile-hanami-filter (func lst)
   "Use FUNC to filter out elements from LST."
   (delq nil (mapcar (lambda (x) (and (funcall func x) x)) lst)))
@@ -316,6 +323,7 @@ values being relative paths to the files."
     (define-key map (kbd "l") 'projectile-hanami-find-lib)
     (define-key map (kbd "c") 'projectile-hanami-find-controller)
     (define-key map (kbd "v") 'projectile-hanami-find-view)
+    (define-key map (kbd ".") 'projectile-hanami-find-env)
     (define-key map (kbd "t") 'projectile-hanami-find-template)
     (define-key map (kbd "p") 'projectile-hanami-find-presenter)
     (define-key map (kbd "s") 'projectile-hanami-find-stylesheet)
