@@ -8,6 +8,7 @@ Projectile Hanami is an [Emacs][] minor mode, based on [Projectile][], for navig
 * quickly jump to some important standard files;
 * run `hanami server`
 * run `hanami console`
+* run `hanami generate`
 * run Rake tasks
 
 Projectile Hanami is based on [Projectile Rails][], but is not a complete port of all its functionality.
@@ -91,6 +92,7 @@ projectile-hanami-goto-gemfile            | <kbd>C-c e g g</kbd> | Find the proj
 projectile-hanami-rake                    | <kbd>C-c e ! r</kbd> | Run a project Rake task.
 projectile-hanami-console                 | <kbd>C-c e ! c</kbd> | Run `hanami console`
 projectile-hanami-server                  | <kbd>C-c e ! s</kbd> | Run `hanami server`
+projectile-hanami-generate                | <kbd>C-c e ! g</kbd> | Run `hanami generate`
 
 [Emacs]: http://www.gnu.org/software/emacs/emacs.html
 [Projectile]: https://github.com/bbatsov/projectile

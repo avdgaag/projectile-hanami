@@ -62,6 +62,34 @@
   :group 'projectile-hanami
   :type 'string)
 
+(defcustom projectile-hanami-generate-filepath-re
+  "^\\s-+\\(?:create\\|identical\\|exists\\|conflict\\|skip\\|prepend\\)\\s-+\\(.+\\)$"
+  "The regex used to find file paths in `projectile-hanami-generate-mode`."
+  :group 'projectile-hanami
+  :type 'regexp)
+
+(define-derived-mode projectile-hanami-generate-mode compilation-mode "Projectile Hanami Generate"
+  "Mode for output of hanami generate."
+  (add-hook 'compilation-finish-functions 'projectile-hanami--generate-buffer-make-buttons nil t)
+  (projectile-hanami-mode +1))
+
+(defun projectile-hanami-generate-ff (button)
+  "Open the file from BUTTON relative to the project path."
+  (find-file (projectile-expand-root (button-label button))))
+
+(defun projectile-hanami--generate-buffer-make-buttons (buffer exit-code)
+  "Hook method to make buttons out of filepaths in BUFFER ignoring EXIT-CODE."
+  (with-current-buffer buffer
+    (goto-char 0)
+    (while (re-search-forward projectile-hanami-generate-filepath-re (max-char) t)
+      (make-button
+       (match-beginning 1)
+       (match-end 1)
+       'action
+       'projectile-hanami-generate-ff
+       'follow-link
+       t))))
+
 (defun projectile-hanami-root ()
   "Find Hanami root directory or nil."
   (ignore-errors
@@ -324,11 +352,21 @@ values being relative paths to the files."
        (run-ruby (concat projectile-hanami-cmd " console"))
      (projectile-hanami-mode +1))))
 
+(defun projectile-hanami-generate ()
+  "Run hanami generate command."
+  (interactive)
+  (projectile-hanami-with-root
+   (let ((cmd (concat projectile-hanami-cmd " generate ")))
+     (compile
+      (concat cmd
+              (read-from-minibuffer cmd)) 'projectile-hanami-generate-mode))))
+
 (defvar projectile-hanami-mode-run-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "r") 'projectile-hanami-rake)
     (define-key map (kbd "c") 'projectile-hanami-console)
     (define-key map (kbd "s") 'projectile-hanami-server)
+    (define-key map (kbd "g") 'projectile-hanami-generate)
     map)
   "Keymap for run-commands in `projectile-hanami-mode`.")
 (fset 'projectile-hanami-mode-run-map projectile-hanami-mode-run-map)
