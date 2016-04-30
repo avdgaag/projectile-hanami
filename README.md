@@ -5,6 +5,7 @@
 Projectile Hanami is an [Emacs][] minor mode, based on [Projectile][], for navigating [Hanami][] projects. With Projectile Hanami, you can:
 
 * navigate through entities, repositories, actions, views and templates are different apps in your project;
+* quickly jump to some important standard files;
 * run `hanami server`
 * run `hanami console`
 * run Rake tasks
@@ -84,6 +85,9 @@ projectile-hanami-goto-related-template   | <kbd>C-c e T</kbd>   | Find the temp
 projectile-hanami-goto-related-view       | <kbd>C-c e V</kbd>   | Find the view related to the current template or controller action.
 projectile-hanami-goto-entity             | <kbd>C-c e E</kbd>   | Find the entity for the current repository.
 projectile-hanami-goto-repository         | <kbd>C-c e R</kbd>   | Find the repository for the current entity.
+projectile-hanami-goto-mapping            | <kbd>C-c e g m</kbd> | Find the project's `lib/config/mapping.rb` file
+projectile-hanami-goto-rakefile           | <kbd>C-c e g r</kbd> | Find the project's Rakefile.
+projectile-hanami-goto-gemfile            | <kbd>C-c e g g</kbd> | Find the project's Gemfile.
 projectile-hanami-rake                    | <kbd>C-c e ! r</kbd> | Run a project Rake task.
 projectile-hanami-console                 | <kbd>C-c e ! c</kbd> | Run `hanami console`
 projectile-hanami-server                  | <kbd>C-c e ! s</kbd> | Run `hanami server`

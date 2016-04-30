@@ -288,6 +288,21 @@ values being relative paths to the files."
          (entity-filename (replace-regexp-in-string "repositories/\\(.+\\)_repository\\.rb$" "entities/\\1.rb" filename)))
     (projectile-hanami-goto-file entity-filename)))
 
+(defun projectile-hanami-goto-gemfile ()
+  "Find the project's Gemfile."
+  (interactive)
+  (projectile-hanami-goto-file "Gemfile"))
+
+(defun projectile-hanami-goto-mapping ()
+  "Find the project's mapping file."
+  (interactive)
+  (projectile-hanami-goto-file "lib/config/mapping.rb"))
+
+(defun projectile-hanami-goto-rakefile ()
+  "Find the project's Rakefile."
+  (interactive)
+  (projectile-hanami-goto-file "Rakefile"))
+
 (defun projectile-hanami-rake (arg)
   "Run a project Rake task ARG."
   (interactive "P")
@@ -317,6 +332,15 @@ values being relative paths to the files."
     map)
   "Keymap for run-commands in `projectile-hanami-mode`.")
 
+(defvar projectile-hanami-mode-goto-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "r") 'projectile-hanami-goto-rakefile)
+    (define-key map (kbd "g") 'projectile-hanami-goto-gemfile)
+    (define-key map (kbd "m") 'projectile-hanami-goto-mapping)
+    map)
+  "Keymap for goto-commands in `projectile-hanami-mode`.")
+(fset 'projectile-hanami-mode-goto-map projectile-hanami-mode-goto-map)
+
 (defvar projectile-hanami-mode-command-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "i") 'projectile-hanami-find-initializer)
@@ -341,6 +365,7 @@ values being relative paths to the files."
     (define-key map (kbd "E") 'projectile-hanami-goto-entity)
     (define-key map (kbd "R") 'projectile-hanami-goto-repository)
     (define-key map (kbd "!") 'projectile-hanami-mode-run-map)
+    (define-key map (kbd "g") 'projectile-hanami-mode-goto-map)
     map)
   "Keymap after `projectile-hanami-keymap-prefix`.")
 
