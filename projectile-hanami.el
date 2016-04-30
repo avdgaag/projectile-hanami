@@ -328,7 +328,7 @@ values being relative paths to the files."
     (define-key map (kbd "p") 'projectile-hanami-find-presenter)
     (define-key map (kbd "s") 'projectile-hanami-find-stylesheet)
     (define-key map (kbd "j") 'projectile-hanami-find-javascript)
-    (define-key map (kbd "g") 'projectile-hanami-find-config)
+    (define-key map (kbd "o") 'projectile-hanami-find-config)
     (define-key map (kbd "u") 'projectile-hanami-find-routes)
     (define-key map (kbd "e") 'projectile-hanami-find-entity)
     (define-key map (kbd "r") 'projectile-hanami-find-repository)
