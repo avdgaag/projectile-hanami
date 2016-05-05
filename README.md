@@ -98,3 +98,4 @@ projectile-hanami-generate                | <kbd>C-c ; ! g</kbd> | Run `hanami g
 [Projectile]: https://github.com/bbatsov/projectile
 [Hanami]: https://hanamirb.org
 [Projectile Rails]: https://github.com/asok/projectile-rails
+[Ruby on Rails]: https://rubyonrails.org
