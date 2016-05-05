@@ -47,6 +47,11 @@
 (require 'rake)
 (require 'inf-ruby)
 
+(defgroup projectile-hanami nil
+  "Hanami mode based on Projectile"
+  :prefix "projectile-hanami-"
+  :group 'projectile)
+
 (defcustom projectile-hanami-keymap-prefix (kbd "C-c e")
   "`projectile-hanami-mode' keymap prefix."
   :group 'projectile-hanami
