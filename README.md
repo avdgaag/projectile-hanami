@@ -51,7 +51,7 @@ Since Projectile Rails cannot distinguish between Rails and Hanami projects, and
 You can define the Projectile Hanami keybinding prefix:
 
 ```elisp
-;; Defaults to C-c e
+;; Defaults to C-c ;
 (setq projectile-hanami-keymap-prefix (kbd "C-c p C-q"))
 ```
 
@@ -66,33 +66,33 @@ To override how Hanami commands are invoked:
 
 Command                                   | Keybinding           | Description
 ------------------------------------------|----------------------|---------------------------------------------------------------------------
-projectile-hanami-find-initializer        | <kbd>C-c e i</kbd>   | Use `projectile-completion-system` to find initializers across apps.
-projectile-hanami-find-lib                | <kbd>C-c e l</kbd>   | Use `projectile-completion-system` to find project lib files.
-projectile-hanami-find-controller         | <kbd>C-c e c</kbd>   | Use `projectile-completion-system` to find controller actions across apps.
-projectile-hanami-find-view               | <kbd>C-c e v</kbd>   | Use `projectile-completion-system` to find views across apps.
-projectile-hanami-find-template           | <kbd>C-c e t</kbd>   | Use `projectile-completion-system` to find templates across apps.
-projectile-hanami-find-presenter          | <kbd>C-c e p</kbd>   | Use `projectile-completion-system` to find presenters across apps.
-projectile-hanami-find-stylesheet         | <kbd>C-c e s</kbd>   | Use `projectile-completion-system` to find stylesheets across apps.
-projectile-hanami-find-javascript         | <kbd>C-c e j</kbd>   | Use `projectile-completion-system` to find javascripts across apps.
-projectile-hanami-find-config             | <kbd>C-c e g</kbd>   | Use `projectile-completion-system` to find config files across apps.
-projectile-hanami-find-routes             | <kbd>C-c e u</kbd>   | Use `projectile-completion-system` to find routes files across apps.
-projectile-hanami-find-entity             | <kbd>C-c e e</kbd>   | Use `projectile-completion-system` to find entities.
-projectile-hanami-find-repository         | <kbd>C-c e r</kbd>   | Use `projectile-completion-system` to find repositories.
-projectile-hanami-find-mailer             | <kbd>C-c e m</kbd>   | Use `projectile-completion-system` to find mailers.
-projectile-hanami-find-mailer-template    | <kbd>C-c e T</kbd>   | Use `projectile-completion-system` to find mailer templates.
-projectile-hanami-find-application        | <kbd>C-c e a</kbd>   | Use `projectile-completion-system` to find main application files.
-projectile-hanami-goto-related-controller | <kbd>C-c e C</kbd>   | Find the controller action related to the current view or template.
-projectile-hanami-goto-related-template   | <kbd>C-c e T</kbd>   | Find the template related to the current view or controller action.
-projectile-hanami-goto-related-view       | <kbd>C-c e V</kbd>   | Find the view related to the current template or controller action.
-projectile-hanami-goto-entity             | <kbd>C-c e E</kbd>   | Find the entity for the current repository.
-projectile-hanami-goto-repository         | <kbd>C-c e R</kbd>   | Find the repository for the current entity.
-projectile-hanami-goto-mapping            | <kbd>C-c e g m</kbd> | Find the project's `lib/config/mapping.rb` file
-projectile-hanami-goto-rakefile           | <kbd>C-c e g r</kbd> | Find the project's Rakefile.
-projectile-hanami-goto-gemfile            | <kbd>C-c e g g</kbd> | Find the project's Gemfile.
-projectile-hanami-rake                    | <kbd>C-c e ! r</kbd> | Run a project Rake task.
-projectile-hanami-console                 | <kbd>C-c e ! c</kbd> | Run `hanami console`
-projectile-hanami-server                  | <kbd>C-c e ! s</kbd> | Run `hanami server`
-projectile-hanami-generate                | <kbd>C-c e ! g</kbd> | Run `hanami generate`
+projectile-hanami-find-initializer        | <kbd>C-c ; i</kbd>   | Use `projectile-completion-system` to find initializers across apps.
+projectile-hanami-find-lib                | <kbd>C-c ; l</kbd>   | Use `projectile-completion-system` to find project lib files.
+projectile-hanami-find-controller         | <kbd>C-c ; c</kbd>   | Use `projectile-completion-system` to find controller actions across apps.
+projectile-hanami-find-view               | <kbd>C-c ; v</kbd>   | Use `projectile-completion-system` to find views across apps.
+projectile-hanami-find-template           | <kbd>C-c ; t</kbd>   | Use `projectile-completion-system` to find templates across apps.
+projectile-hanami-find-presenter          | <kbd>C-c ; p</kbd>   | Use `projectile-completion-system` to find presenters across apps.
+projectile-hanami-find-stylesheet         | <kbd>C-c ; s</kbd>   | Use `projectile-completion-system` to find stylesheets across apps.
+projectile-hanami-find-javascript         | <kbd>C-c ; j</kbd>   | Use `projectile-completion-system` to find javascripts across apps.
+projectile-hanami-find-config             | <kbd>C-c ; g</kbd>   | Use `projectile-completion-system` to find config files across apps.
+projectile-hanami-find-routes             | <kbd>C-c ; u</kbd>   | Use `projectile-completion-system` to find routes files across apps.
+projectile-hanami-find-entity             | <kbd>C-c ; e</kbd>   | Use `projectile-completion-system` to find entities.
+projectile-hanami-find-repository         | <kbd>C-c ; r</kbd>   | Use `projectile-completion-system` to find repositories.
+projectile-hanami-find-mailer             | <kbd>C-c ; m</kbd>   | Use `projectile-completion-system` to find mailers.
+projectile-hanami-find-mailer-template    | <kbd>C-c ; T</kbd>   | Use `projectile-completion-system` to find mailer templates.
+projectile-hanami-find-application        | <kbd>C-c ; a</kbd>   | Use `projectile-completion-system` to find main application files.
+projectile-hanami-goto-related-controller | <kbd>C-c ; C</kbd>   | Find the controller action related to the current view or template.
+projectile-hanami-goto-related-template   | <kbd>C-c ; T</kbd>   | Find the template related to the current view or controller action.
+projectile-hanami-goto-related-view       | <kbd>C-c ; V</kbd>   | Find the view related to the current template or controller action.
+projectile-hanami-goto-entity             | <kbd>C-c ; E</kbd>   | Find the entity for the current repository.
+projectile-hanami-goto-repository         | <kbd>C-c ; R</kbd>   | Find the repository for the current entity.
+projectile-hanami-goto-mapping            | <kbd>C-c ; g m</kbd> | Find the project's `lib/config/mapping.rb` file
+projectile-hanami-goto-rakefile           | <kbd>C-c ; g r</kbd> | Find the project's Rakefile.
+projectile-hanami-goto-gemfile            | <kbd>C-c ; g g</kbd> | Find the project's Gemfile.
+projectile-hanami-rake                    | <kbd>C-c ; ! r</kbd> | Run a project Rake task.
+projectile-hanami-console                 | <kbd>C-c ; ! c</kbd> | Run `hanami console`
+projectile-hanami-server                  | <kbd>C-c ; ! s</kbd> | Run `hanami server`
+projectile-hanami-generate                | <kbd>C-c ; ! g</kbd> | Run `hanami generate`
 
 [Emacs]: http://www.gnu.org/software/emacs/emacs.html
 [Projectile]: https://github.com/bbatsov/projectile

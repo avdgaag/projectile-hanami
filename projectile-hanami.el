@@ -52,7 +52,7 @@
   :prefix "projectile-hanami-"
   :group 'projectile)
 
-(defcustom projectile-hanami-keymap-prefix (kbd "C-c e")
+(defcustom projectile-hanami-keymap-prefix (kbd "C-c ;")
   "`projectile-hanami-mode' keymap prefix."
   :group 'projectile-hanami
   :type 'string)
