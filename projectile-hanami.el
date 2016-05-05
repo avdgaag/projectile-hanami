@@ -46,6 +46,7 @@
 (require 'projectile)
 (require 'rake)
 (require 'inf-ruby)
+(require 'cl-lib)
 
 (defgroup projectile-hanami nil
   "Hanami mode based on Projectile"
@@ -127,10 +128,10 @@ The DIRS is list of lists consisting of a directory path and regexp to filter
 files from that directory.  Returns a hash table with keys being short names and
 values being relative paths to the files."
   (let ((hash (make-hash-table :test 'equal)))
-    (loop for (dir re) in dirs do
-          (loop for file in (projectile-dir-files (projectile-expand-root dir)) do
-                (when (string-match re file)
-                  (puthash (projectile-hanami-concat-string-matches re file "/") file hash))))
+    (cl-loop for (dir re) in dirs do
+             (cl-loop for file in (projectile-dir-files (projectile-expand-root dir)) do
+                      (when (string-match re file)
+                        (puthash (projectile-hanami-concat-string-matches re file "/") file hash))))
     hash))
 
 (defun projectile-hanami-hash-keys (hash)
