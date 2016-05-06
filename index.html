@@ -19,74 +19,84 @@
     </section>
 
     <section class="main-content">
+      <h1>Projectile Hanami</h1>
 
-      <h1 id="projectile-hanami">Projectile Hanami</h1>
-
-      <h2 id="summary">Summary</h2>
+      <h2>Summary</h2>
 
       <p>Projectile Hanami is an <a href="http://www.gnu.org/software/emacs/emacs.html">Emacs</a> minor mode, based on <a href="https://github.com/bbatsov/projectile">Projectile</a>, for navigating <a href="https://hanamirb.org">Hanami</a> projects. With Projectile Hanami, you can:</p>
 
       <ul>
         <li>navigate through entities, repositories, actions, views and templates are different apps in your project;</li>
         <li>quickly jump to some important standard files;</li>
-        <li>run <code>hanami server</code></li>
-        <li>run <code>hanami console</code></li>
-        <li>run <code>hanami generate</code></li>
+        <li>run <code>hanami server</code>
+        </li>
+        <li>run <code>hanami console</code>
+        </li>
+        <li>run <code>hanami generate</code>
+        </li>
         <li>run Rake tasks</li>
       </ul>
 
       <p>Projectile Hanami is based on <a href="https://github.com/asok/projectile-rails">Projectile Rails</a>, but is not a complete port of all its functionality.</p>
 
-      <h2 id="installation">Installation</h2>
+      <h2>Installation</h2>
 
       <p>This guide assumes you have <a href="https://github.com/bbatsov/projectile">Projectile</a> already set up.</p>
 
-      <p>Since this package is still under heavy development and testing, it is not yet available through one of the popular package managers. You can try it out by cloning the repository and adding it to your <code>load-path</code>:</p>
+      <h3>MELPA</h3>
 
-      <p><code>elisp
-(add-to-list 'load-path "/path/to/repo")
-(require 'projectile-hanami)
-      </code></p>
+      <p>If you have <a href="http://melpa.org">MELPA</a> set up, you can use <code>package-install</code> to install the <code>projectile-hanami</code> package.</p>
+
+      <h3>Manual installation</h3>
+
+      <p>You can manually install Projectile hanami by cloning the repository and adding it to your <code>load-path</code>:</p>
+
+      <pre class="highlight highlight-elisp"><code><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'load-path</span> <span class="s">"/path/to/repo"</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">require</span> <span class="ss">'projectile-hanami</span><span class="p">)</span>
+      </code></pre>
+
+
+      <h2>Setup</h2>
 
       <p>To have Projectile Hanami loaded whenever Projectile is loaded, you can add it as a hook:</p>
 
-      <p><code>elisp
-(add-hook 'projectile-mode-hook 'projectile-hanami-on)
-      </code></p>
+      <pre class="highlight highlight-elisp"><code><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'projectile-mode-hook</span> <span class="ss">'projectile-hanami-on</span><span class="p">)</span>
+      </code></pre>
 
-      <p>…but, this will most likely conflict with Projectile Rails. If you use both <a href="http://rubyonrails.org">Ruby on Rails</a> <em>and</em> Hanami, you will probably want something <em>slightly</em> more sophisticated. I use the following snippet:</p>
 
-      <p>```elisp
-        (defun projectile-rails-or-hanami-on ()
-        “Activate either <code>projectile-rails-mode</code> or <code>projectile-hanami-mode</code>.”
-        (if (projectile-hanami-applicable-p)
-        (projectile-hanami-mode +1)
-        (projectile-rails-on)))</p>
+      <p>...but, this will most likely conflict with Projectile Rails. If you use both <a href="https://rubyonrails.org">Ruby on Rails</a> <em>and</em> Hanami, you will probably want something <em>slightly</em> more sophisticated. I use the following snippet:</p>
 
-      <p>(add-hook ‘projectile-mode-hook ‘projectile-rails-or-hanami-on)
-        ```</p>
+      <pre class="highlight highlight-elisp"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">projectile-rails-or-hanami-on</span> <span class="p">()</span>
+        <span class="s">"Activate either `projectile-rails-mode` or `projectile-hanami-mode`."</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">projectile-hanami-applicable-p</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">projectile-hanami-mode</span> <span class="mi">+1</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">projectile-rails-on</span><span class="p">)))</span>
 
-      <p>Since Projectile Rails cannot distinguish between Rails and Hanami projects, and Hanami <em>can</em>, we use Projectile Hanami’s detection mechanism and fall back to Projectile Rails in case of no match.</p>
+        <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'projectile-mode-hook</span> <span class="ss">'projectile-rails-or-hanami-on</span><span class="p">)</span>
+      </code></pre>
 
-      <h2 id="usage">Usage</h2>
 
-      <h3 id="customization">Customization</h3>
+      <p>Since Projectile Rails cannot distinguish between Rails and Hanami projects, and Hanami <em>can</em>, we use Projectile Hanami's detection mechanism and fall back to Projectile Rails in case of no match.</p>
+
+      <h2>Usage</h2>
+
+      <h3>Customization</h3>
 
       <p>You can define the Projectile Hanami keybinding prefix:</p>
 
-      <p><code>elisp
-;; Defaults to C-c ;
-(setq projectile-hanami-keymap-prefix (kbd "C-c p C-q"))
-      </code></p>
+      <pre class="highlight highlight-elisp"><code><span class="c1">;; Defaults to C-c ;</span>
+        <span class="p">(</span><span class="k">setq</span> <span class="nv">projectile-hanami-keymap-prefix</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">"C-c p C-q"</span><span class="p">))</span>
+      </code></pre>
+
 
       <p>To override how Hanami commands are invoked:</p>
 
-      <p><code>elisp
-;; Defaults to `bundle exec hanami`
-(setq projectile-hanami-cmd "/path/to/hanami")
-      </code></p>
+      <pre class="highlight highlight-elisp"><code><span class="c1">;; Defaults to `bundle exec hanami`</span>
+        <span class="p">(</span><span class="k">setq</span> <span class="nv">projectile-hanami-cmd</span> <span class="s">"/path/to/hanami"</span><span class="p">)</span>
+      </code></pre>
 
-      <h3 id="commands">Commands</h3>
+
+      <h3>Commands</h3>
 
       <table>
         <thead>
@@ -200,17 +210,17 @@
           <tr>
             <td>projectile-hanami-goto-mapping</td>
             <td><kbd>C-c ; g m</kbd></td>
-            <td>Find the project’s <code>lib/config/mapping.rb</code> file</td>
+            <td>Find the project's <code>lib/config/mapping.rb</code> file</td>
           </tr>
           <tr>
             <td>projectile-hanami-goto-rakefile</td>
             <td><kbd>C-c ; g r</kbd></td>
-            <td>Find the project’s Rakefile.</td>
+            <td>Find the project's Rakefile.</td>
           </tr>
           <tr>
             <td>projectile-hanami-goto-gemfile</td>
             <td><kbd>C-c ; g g</kbd></td>
-            <td>Find the project’s Gemfile.</td>
+            <td>Find the project's Gemfile.</td>
           </tr>
           <tr>
             <td>projectile-hanami-rake</td>
@@ -220,27 +230,23 @@
           <tr>
             <td>projectile-hanami-console</td>
             <td><kbd>C-c ; ! c</kbd></td>
-            <td>Run <code>hanami console</code></td>
+            <td>Run <code>hanami console</code>
+            </td>
           </tr>
           <tr>
             <td>projectile-hanami-server</td>
             <td><kbd>C-c ; ! s</kbd></td>
-            <td>Run <code>hanami server</code></td>
+            <td>Run <code>hanami server</code>
+            </td>
           </tr>
           <tr>
             <td>projectile-hanami-generate</td>
             <td><kbd>C-c ; ! g</kbd></td>
-            <td>Run <code>hanami generate</code></td>
+            <td>Run <code>hanami generate</code>
+            </td>
           </tr>
         </tbody>
       </table>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/avdgaag/projectile-hanami">Projectile Hanami</a> is maintained by <a href="https://github.com/avdgaag">avdgaag</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
     </section>
 
   </body>
