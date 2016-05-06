@@ -17,12 +17,20 @@ Projectile Hanami is based on [Projectile Rails][], but is not a complete port o
 
 This guide assumes you have [Projectile][] already set up.
 
-Since this package is still under heavy development and testing, it is not yet available through one of the popular package managers. You can try it out by cloning the repository and adding it to your `load-path`:
+### MELPA
+
+If you have [MELPA][] set up, you can use `package-install` to install the `projectile-hanami` package.
+
+### Manual installation
+
+You can manually install Projectile hanami by cloning the repository and adding it to your `load-path`:
 
 ```elisp
 (add-to-list 'load-path "/path/to/repo")
 (require 'projectile-hanami)
 ```
+
+## Setup
 
 To have Projectile Hanami loaded whenever Projectile is loaded, you can add it as a hook:
 
@@ -99,3 +107,4 @@ projectile-hanami-generate                | <kbd>C-c ; ! g</kbd> | Run `hanami g
 [Hanami]: https://hanamirb.org
 [Projectile Rails]: https://github.com/asok/projectile-rails
 [Ruby on Rails]: https://rubyonrails.org
+[MELPA]: http://melpa.org
